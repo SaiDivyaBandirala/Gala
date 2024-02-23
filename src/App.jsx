@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { fetchMetaData } from "./api/Api";
 
 const theme = createTheme({
     palette: {
@@ -30,9 +31,22 @@ const theme = createTheme({
 });
 
 function App() {
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        fetchMetaData()
+            .then((data) => {
+                console.log(data.data.users);
+                setUsers(data.data.users);
+            })
+            .catch((error) => {
+                console.error("Error fetching metadata:", error);
+            });
+    }, [users]);
     return (
         <ThemeProvider theme={theme}>
-            <Typography secondary>GALA</Typography>
+            <Typography>GALA</Typography>
+            <Typography>{users}</Typography>
             <Button variant="contained">Theme</Button>
         </ThemeProvider>
     );
