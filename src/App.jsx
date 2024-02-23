@@ -1,7 +1,7 @@
-import React from "react";
-import "./App.css";
+import React, { useContext } from "react";
 import { Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { DataContext } from "./contexts/DataContext";
 
 const theme = createTheme({
     palette: {
@@ -30,9 +30,14 @@ const theme = createTheme({
 });
 
 function App() {
+    // Assuming you want to use the usersList from DataContext
+    const { usersList } = useContext(DataContext);
+
     return (
         <ThemeProvider theme={theme}>
-            <Typography secondary>GALA</Typography>
+            <Typography color="secondary">GALA</Typography>
+            {/* Display the number of users in the usersList */}
+            <Typography>{usersList.length}</Typography>
             <Button variant="contained">Theme</Button>
         </ThemeProvider>
     );
