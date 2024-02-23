@@ -7,8 +7,6 @@ import Theme from "./assets/styles/Theme.json";
 const theme = createTheme(Theme);
 
 function App() {
-    const [users, setUsers] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
             try {
