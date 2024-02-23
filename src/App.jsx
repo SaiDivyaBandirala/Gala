@@ -3,8 +3,8 @@ import { Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
 import { fetchMetaData } from "./api/Api";
-
-const theme = createTheme();
+import Theme from "./assets/styles/Theme.json";
+const theme = createTheme(Theme);
 
 function App() {
     const [users, setUsers] = useState([]);
