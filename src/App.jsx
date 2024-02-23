@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DataContext } from "./contexts/DataContext";
+import "./App.css";
+import { fetchMetaData } from "./api/Api";
 
 const theme = createTheme({
     palette: {
@@ -30,14 +32,23 @@ const theme = createTheme({
 });
 
 function App() {
-    // Assuming you want to use the usersList from DataContext
     const { usersList } = useContext(DataContext);
+    const [users, setUsers] = useState([]);
 
+    useEffect(() => {
+        fetchMetaData()
+            .then((data) => {
+                console.log(data.data.users);
+                setUsers(data.data.users);
+            })
+            .catch((error) => {
+                console.error("Error fetching metadata:", error);
+            });
+    }, [users]);
     return (
         <ThemeProvider theme={theme}>
-            <Typography color="secondary">GALA</Typography>
-            {/* Display the number of users in the usersList */}
-            <Typography>{usersList.length}</Typography>
+            <Typography>GALA</Typography>
+            <Typography>{users}</Typography>
             <Button variant="contained">Theme</Button>
         </ThemeProvider>
     );
