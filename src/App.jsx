@@ -1,33 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { Button, Typography } from "@mui/material";
+import React, { useContext, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
-import { fetchMetaData } from "./api/Api";
 import Theme from "./assets/styles/Theme.json";
+import SevensGame from "./pages/SevensGame";
+import { DataContext } from "./contexts/DataContext";
+import { getUsersList } from "./api/Api";
+import { getGamesList } from "./api/Games/getGamesList";
 const theme = createTheme(Theme);
 
 function App() {
+    const { updateUsersList, updateGamesList } = useContext(DataContext);
+
+    const getUsers = async () => {
+        try {
+            const data = await getUsersList();
+            updateUsersList(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    const getGames = async () => {
+        try {
+            const data = await getGamesList();
+            updateGamesList(data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const metaDataResponse = await fetchMetaData();
-                const usersListResponse = await getUsersList(metaDataResponse);
-
-                usersListResponse.data.map((user) => {
-                    getUser(user);
-                });
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            }
-        };
-
-        fetchData();
+        getUsers();
+        getGames();
     }, []);
+
     return (
         <ThemeProvider theme={theme}>
-            <Typography>GALA</Typography>
-            <Typography></Typography>
-            <Button variant="contained">Theme</Button>
+            <SevensGame></SevensGame>
         </ThemeProvider>
     );
 }
