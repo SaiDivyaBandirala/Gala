@@ -1,94 +1,72 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext } from "react";
+import { CompactTable } from "@table-library/react-table-library/compact";
+import { useTheme } from "@table-library/react-table-library/theme";
 import {
-    MaterialReactTable,
-    useMaterialReactTable,
-} from "material-react-table";
+    DEFAULT_OPTIONS,
+    getTheme,
+} from "@table-library/react-table-library/material-ui";
 import { DataContext } from "../../../contexts/DataContext";
 
 const GameTable = () => {
     const { usersList, gamesList } = useContext(DataContext);
 
-    // Ensure gamesList and usersList are not null or undefined
-    if (!gamesList || !usersList) {
-        console.error("ERROR: gamesList or usersList is null or undefined");
+    if (gamesList.length < 1 || usersList.length < 1) {
         return null;
     }
 
-    // Extract players and rounds data from the first game in the list
     const { players, rounds } = gamesList[0]?.data;
     const roundNumbers = Object.keys(rounds);
 
-    // Map player IDs to usernames
-    const playersMap = useMemo(() => {
-        const map = new Map();
-        usersList.forEach((player) => {
-            map.set(player.id, player.username);
-        });
-        return map;
-    }, [usersList]);
+    const playersMap = new Map();
+    usersList.forEach((player) => {
+        playersMap.set(player.id, player.username);
+    });
 
-    // Prepare data for the table
-    const data = useMemo(() => {
-        const rowData = [];
+    const data = roundNumbers.map((roundNumber) => {
+        const rowData = {
+            round: roundNumber,
+        };
 
-        roundNumbers.forEach((roundNumber) => {
-            const roundData = {
-                round: roundNumber,
-                ...players.reduce((acc, player) => {
-                    acc[`player${player}`] =
-                        rounds[roundNumber].points[player] || 0;
-                    return acc;
-                }, {}),
-            };
-
-            rowData.push(roundData);
-        });
-
-        // Calculate totals for each player
-        const playerTotals = players.reduce((acc, player) => {
-            acc[`player${player}`] = roundNumbers.reduce(
-                (total, roundNumber) => {
-                    return total + (rounds[roundNumber].points[player] || 0);
-                },
-                0
-            );
-            return acc;
-        }, {});
-
-        // Append a new row with player totals
-        rowData.push({
-            round: "Total",
-            ...playerTotals,
+        players.forEach((player) => {
+            const playerId = `player${player}`;
+            rowData[playerId] = rounds[roundNumber].points[player] || 0;
         });
 
         return rowData;
-    }, [players, rounds, roundNumbers]);
-
-    // Define columns
-    const columns = useMemo(() => {
-        const playerColumns = players.map((player) => ({
-            accessorKey: `player${player}`,
-            header: playersMap.get(parseInt(player)),
-        }));
-
-        return [
-            { accessorKey: "round", header: "Round", pinned: "left" },
-            ...playerColumns,
-        ];
-    }, [players, playersMap]);
-
-    // Initialize Material React Table
-    const table = useMaterialReactTable({
-        columns,
-        data,
-        initialState: {
-            columnPinning: {
-                left: ["round"],
-            },
-        },
     });
 
-    return <MaterialReactTable table={table} />;
+    const playerTotals = {
+        round: "Total",
+    };
+    players.forEach((player) => {
+        const playerId = `player${player}`;
+        playerTotals[playerId] = roundNumbers.reduce(
+            (total, roundNumber) =>
+                total + (rounds[roundNumber].points[player] || 0),
+            0
+        );
+    });
+    data.push(playerTotals);
+
+    const columns = [
+        { label: "Round", renderCell: (item) => item.round },
+        ...players.map((player) => ({
+            label: playersMap.get(parseInt(player)),
+            renderCell: (item) => item[`player${player}`],
+        })),
+    ];
+
+    const materialTheme = getTheme(DEFAULT_OPTIONS);
+    const theme = useTheme(materialTheme);
+    return (
+        <>
+            <CompactTable
+                columns={columns}
+                data={{ nodes: data }}
+                theme={theme}
+            />
+        </>
+    );
 };
 
 export default GameTable;
