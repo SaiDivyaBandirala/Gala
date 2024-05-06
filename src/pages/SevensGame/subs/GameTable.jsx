@@ -8,13 +8,21 @@ import {
 import { DataContext } from "../../../contexts/DataContext";
 
 const GameTable = () => {
-    const { usersList, gamesList } = useContext(DataContext);
-
+    const { usersList, gamesList, selectedGame } = useContext(DataContext);
+    if (!selectedGame) {
+        return null;
+    }
+    if (!gamesList || !usersList) {
+        return null;
+    }
     if (gamesList.length < 1 || usersList.length < 1) {
         return null;
     }
-
-    const { players, rounds } = gamesList[0]?.data;
+    const currentGame = gamesList.find((game) => game.id === selectedGame);
+    if (!currentGame) {
+        return null;
+    }
+    const { players, rounds } = currentGame?.data;
     const roundNumbers = Object.keys(rounds);
 
     const playersMap = new Map();

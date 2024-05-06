@@ -6,6 +6,7 @@ import SevensGame from "./pages/SevensGame";
 import { DataContext } from "./contexts/DataContext";
 import { getUsersList } from "./api/Api";
 import { getGamesList } from "./api/Games/getGamesList";
+import GamesListPage from "./pages/GamesList";
 const theme = createTheme(Theme);
 
 function App() {
@@ -36,7 +37,8 @@ function App() {
 
     return (
         <ThemeProvider theme={theme}>
-            <SevensGame></SevensGame>
+            <GamesListPage />
+            <SevensGame />
         </ThemeProvider>
     );
 }
