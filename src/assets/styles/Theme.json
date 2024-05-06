@@ -2,24 +2,34 @@
     "palette": {
         "type": "light",
         "primary": {
-            "main": "#52615A",
-            "light": "#AAC2B1",
-            "dark": "#52615A",
-            "contrastText": "#FAFAFC"
+            "main": "#000000",
+            "contrastText": "#ffffff"
         },
         "secondary": {
-            "main": "#F39581",
-            "contrastText": "#FAFAFC"
+            "main": "#fdbc00"
         },
         "background": {
             "default": "#ffffff",
-            "paper": "#ffffff"
+            "paper": "#f6f6f6"
         },
         "text": {
-            "primary": "#000000",
-            "secondary": "#FAFAFC",
-            "disabled": "#111419",
-            "hint": "#111419"
-        }
+            "primary": "#303030",
+            "secondary": "#545454",
+            "disabled": "#e8e8e8",
+            "hint": "#fdbc00"
+        },
+        "info": {
+            "main": "#7ab0d1"
+        },
+        "error": {
+            "main": "#fe5454"
+        },
+        "warning": {
+            "main": "#fdbc00"
+        },
+        "success": {
+            "main": "#d4fd00"
+        },
+        "divider": "#000000"
     }
 }
