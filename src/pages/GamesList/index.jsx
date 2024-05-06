@@ -20,9 +20,7 @@ const GamesListPage = () => {
         useContext(DataContext);
 
     const handleGameClick = (gameId) => {
-        console.log(selectedGame);
         updateSelectedGame(gameId);
-        console.log(selectedGame);
     };
 
     return (

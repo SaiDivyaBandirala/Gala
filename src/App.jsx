@@ -10,6 +10,7 @@ import { getUsersList } from "./api/Api";
 import { getGamesList } from "./api/Games/getGamesList";
 import GamesListPage from "./pages/GamesList";
 import Routes from "./Routes";
+import { Auth0ProviderWithNavigate } from "./auth0-provider-with-navigate";
 const theme = createTheme(Theme);
 
 function App() {
@@ -40,9 +41,11 @@ function App() {
 
     return (
         <Router>
-            <ThemeProvider theme={theme}>
-                <Routes />
-            </ThemeProvider>
+            <Auth0ProviderWithNavigate>
+                <ThemeProvider theme={theme}>
+                    <Routes />
+                </ThemeProvider>
+            </Auth0ProviderWithNavigate>
         </Router>
     );
 }
