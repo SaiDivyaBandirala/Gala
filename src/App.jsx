@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter as Router } from "react-router-dom";
+
 import "./App.css";
 import Theme from "./assets/styles/Theme.json";
 import SevensGame from "./pages/SevensGame";
@@ -7,6 +9,7 @@ import { DataContext } from "./contexts/DataContext";
 import { getUsersList } from "./api/Api";
 import { getGamesList } from "./api/Games/getGamesList";
 import GamesListPage from "./pages/GamesList";
+import Routes from "./Routes";
 const theme = createTheme(Theme);
 
 function App() {
@@ -36,10 +39,11 @@ function App() {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
-            <GamesListPage />
-            <SevensGame />
-        </ThemeProvider>
+        <Router>
+            <ThemeProvider theme={theme}>
+                <Routes />
+            </ThemeProvider>
+        </Router>
     );
 }
 

@@ -8,6 +8,7 @@ import {
     Box,
 } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
+import Navbar from "../Dashboard/subs/navbar";
 
 const formatDate = (dateString) => {
     console.log("received DataContext", dateString);
@@ -26,6 +27,7 @@ const GamesListPage = () => {
 
     return (
         <div>
+            <Navbar></Navbar>
             {gamesList.map((game) => (
                 <ButtonBase
                     key={game.id}
