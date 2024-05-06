@@ -25,6 +25,7 @@
             "error",
             "always"
         ],
-        "endOfLine" : "off"
+        "endOfLine" : 0
+       
     }
 }
