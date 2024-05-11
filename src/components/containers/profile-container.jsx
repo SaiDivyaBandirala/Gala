@@ -9,6 +9,7 @@ const ProfileCard = ({ user }) => {
         <Paper
             elevation={0}
             sx={{
+                backgroundColor: "#fff",
                 margin: "auto",
                 display: "flex",
                 justifyContent: "center",

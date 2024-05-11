@@ -29,6 +29,7 @@ const GamesListPage = () => {
                         key={game.id}
                         onClick={() => handleGameClick(game.id)}
                         style={{
+                            backgroundColor: "#fff",
                             display: "block",
                             width: "100%",
                         }}
@@ -36,6 +37,7 @@ const GamesListPage = () => {
                         <Paper
                             elevation={0}
                             style={{
+                                backgroundColor: "#fff",
                                 padding: "20px",
                                 marginBottom: "10px",
                                 display: "flex",

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Container, Typography } from "@mui/material";
 import Navbar from "./subs/navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import ProfileCard from "../../components/containers/profile-container";
@@ -14,9 +13,7 @@ const Dashboard = () => {
     return (
         <>
             <Navbar></Navbar>
-            <BaseContainer>
-                <ProfileCard user={user} />
-            </BaseContainer>
+            <BaseContainer>{user && <ProfileCard user={user} />}</BaseContainer>
         </>
     );
 };
