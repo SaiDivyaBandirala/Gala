@@ -4,6 +4,7 @@ import GameTable from "./subs/GameTable";
 import Navbar from "../Dashboard/subs/navbar";
 import BaseContainer from "../../components/containers/base-contatiner";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../contexts/DataContext";
 
@@ -15,6 +16,9 @@ const SevensGame = () => {
     const handleBack = () => {
         updateSelectedGame(null);
         navigate("/games");
+    };
+    const handleEdit = () => {
+        navigate("/edit-game");
     };
 
     return (
@@ -35,6 +39,14 @@ const SevensGame = () => {
                         sx={{ align: "center", flexGrow: 1 }}
                     >
                         Game Scores
+                    </Typography>
+                    <Typography variant="h4" sx={{}}>
+                        <ButtonBase
+                            onClick={() => handleEdit()}
+                            sx={{ padding: "0 1em" }}
+                        >
+                            <EditIcon />
+                        </ButtonBase>
                     </Typography>
                 </Stack>
                 <GameTable></GameTable>

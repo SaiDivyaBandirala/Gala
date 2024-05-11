@@ -3,6 +3,7 @@ import { Route, Routes as Switch } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/index";
 import GamesList from "./pages/GamesList/index";
 import SevensGame from "./pages/SevensGame/index";
+import EditGame from "./pages/EditGame/index";
 import { CallbackPage } from "./pages/Dashboard/subs/callback-page";
 
 function Routes() {
@@ -12,6 +13,7 @@ function Routes() {
             <Route path="callback" element={<CallbackPage />} />
             <Route path="games" element={<GamesList />} />
             <Route path="sevens" element={<SevensGame />} />
+            <Route path="edit-game" element={<EditGame />} />
         </Switch>
     );
 }
