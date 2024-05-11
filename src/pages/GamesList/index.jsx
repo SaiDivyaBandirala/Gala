@@ -30,7 +30,6 @@ const GamesListPage = () => {
                         onClick={() => handleGameClick(game.id)}
                         style={{
                             display: "block",
-                            padding: "2em",
                             width: "100%",
                         }}
                     >

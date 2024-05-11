@@ -7,7 +7,9 @@ const BaseContainer = ({ children }) => {
         <React.Fragment>
             <CssBaseline />
             <Container maxWidth="lg">
-                <Paper elevation={0}>{children}</Paper>
+                <Paper elevation={0} sx={{ padding: "1em" }}>
+                    {children}
+                </Paper>
             </Container>
         </React.Fragment>
     );
