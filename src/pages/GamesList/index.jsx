@@ -9,35 +9,28 @@ import {
 } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
 import Navbar from "../Dashboard/subs/navbar";
-
+import { useNavigate } from "react-router-dom";
+import { BaseContainer } from "../../components/containers/base-contatiner";
 const formatDate = (dateString) => {
     console.log("received DataContext", dateString);
     return dateString;
 };
 
 const GamesListPage = () => {
+    const navigate = useNavigate();
+
     const { gamesList, updateSelectedGame, selectedGame } =
         useContext(DataContext);
 
     const handleGameClick = (gameId) => {
         updateSelectedGame(gameId);
+        navigate("/sevens");
     };
 
     return (
         <div>
             <Navbar></Navbar>
-            <Paper
-                elevation={0}
-                sx={{
-                    margin: "auto",
-                    width: {
-                        sm: "480px",
-                        md: "960px",
-                        lg: "1280px",
-                        xl: "1920px",
-                    },
-                }}
-            >
+            <BaseContainer>
                 {gamesList.map((game) => (
                     <ButtonBase
                         key={game.id}
@@ -100,7 +93,7 @@ const GamesListPage = () => {
                         </Paper>
                     </ButtonBase>
                 ))}
-            </Paper>
+            </BaseContainer>
         </div>
     );
 };
