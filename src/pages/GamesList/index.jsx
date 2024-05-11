@@ -32,6 +32,7 @@ const GamesListPage = () => {
                             backgroundColor: "#fff",
                             display: "block",
                             width: "100%",
+                            marginBottom: "0.5em",
                         }}
                     >
                         <Paper
