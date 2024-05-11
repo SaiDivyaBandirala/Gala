@@ -8,7 +8,7 @@ function Navbar() {
     const { isAuthenticated } = useAuth0();
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ marginBottom: "2.5em" }}>
             <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     GALA
