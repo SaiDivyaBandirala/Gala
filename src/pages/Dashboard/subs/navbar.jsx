@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Button, Typography, IconButton } from "@mui/material";
-import { LoginButton } from "../../../components/buttons/Login-button";
+import { AppBar, Toolbar, Button, Typography } from "@mui/material";
+import { NavBarButtons } from "../../../components/buttons/nav-bar-buttons";
 
 function Navbar() {
     return (
@@ -19,7 +19,7 @@ function Navbar() {
                 <Button component={Link} to="/sevens" color="inherit">
                     Sevens
                 </Button>
-                <LoginButton />
+                <NavBarButtons></NavBarButtons>
             </Toolbar>
         </AppBar>
     );
