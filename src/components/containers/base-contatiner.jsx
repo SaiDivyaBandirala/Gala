@@ -1,24 +1,15 @@
-import { Paper } from "@mui/material";
+import { Paper, Container, CssBaseline } from "@mui/material";
 import React from "react";
 import PropTypes from "prop-types";
 
 const BaseContainer = ({ children }) => {
     return (
-        <Paper
-            elevation={0}
-            sx={{
-                bgcolor: "#fff",
-                margin: "auto",
-                width: {
-                    sm: "480px",
-                    md: "960px",
-                    lg: "1280px",
-                    xl: "1920px",
-                },
-            }}
-        >
-            {children}
-        </Paper>
+        <React.Fragment>
+            <CssBaseline />
+            <Container maxWidth="lg">
+                <Paper elevation={0}>{children}</Paper>
+            </Container>
+        </React.Fragment>
     );
 };
 export default BaseContainer;
