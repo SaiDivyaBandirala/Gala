@@ -1,16 +1,9 @@
 import React, { useContext } from "react";
-import {
-    ButtonBase,
-    Paper,
-    Typography,
-    Avatar,
-    Stack,
-    Box,
-} from "@mui/material";
+import { ButtonBase, Paper, Typography, Avatar, Stack } from "@mui/material";
 import { DataContext } from "../../contexts/DataContext";
 import Navbar from "../Dashboard/subs/navbar";
 import { useNavigate } from "react-router-dom";
-import { BaseContainer } from "../../components/containers/base-contatiner";
+import BaseContainer from "../../components/containers/base-contatiner";
 const formatDate = (dateString) => {
     console.log("received DataContext", dateString);
     return dateString;

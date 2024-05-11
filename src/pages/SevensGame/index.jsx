@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 import GameTable from "./subs/GameTable";
 import Navbar from "../Dashboard/subs/navbar";
-import { BaseContainer } from "../../components/containers/base-contatiner";
+import BaseContainer from "../../components/containers/base-contatiner";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../../contexts/DataContext";
