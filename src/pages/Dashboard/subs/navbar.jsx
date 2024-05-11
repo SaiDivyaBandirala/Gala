@@ -21,9 +21,6 @@ function Navbar() {
                         <Button component={Link} to="/games" color="inherit">
                             Games
                         </Button>
-                        <Button component={Link} to="/sevens" color="inherit">
-                            Sevens
-                        </Button>
                     </>
                 )}
 
