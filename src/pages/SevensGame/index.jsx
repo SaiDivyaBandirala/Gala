@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { ButtonBase, Stack, Typography } from "@mui/material";
 import GameTable from "./subs/GameTable";
 import Navbar from "../Dashboard/subs/navbar";
@@ -31,7 +31,7 @@ const SevensGame = () => {
                         variant="h4"
                         sx={{ align: "center", flexGrow: 1 }}
                     >
-                        Sevens Game
+                        Game Scores
                     </Typography>
                 </Stack>
                 <GameTable></GameTable>
