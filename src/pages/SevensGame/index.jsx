@@ -21,9 +21,12 @@ const SevensGame = () => {
         <>
             <Navbar></Navbar>
             <BaseContainer>
-                <Stack direction="row">
+                <Stack direction="row" sx={{ padding: "1em" }}>
                     <Typography variant="h4" sx={{ flexGrow: 1 }}>
-                        <ButtonBase onClick={() => handleBack()}>
+                        <ButtonBase
+                            onClick={() => handleBack()}
+                            sx={{ padding: "0 1em" }}
+                        >
                             <ArrowBackIcon />
                         </ButtonBase>
                     </Typography>
