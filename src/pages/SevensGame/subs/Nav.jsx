@@ -38,7 +38,7 @@ export default function Nav() {
                     onClick={() => handleEdit()}
                     sx={{ padding: "0 1em" }}
                 >
-                    <EditIcon />
+                    <EditIcon color="secondary" />
                 </ButtonBase>
             </Typography>
         </Stack>

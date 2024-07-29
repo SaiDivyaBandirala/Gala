@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CircularSlider from "@fseehawer/react-circular-slider";
 import PropTypes from "prop-types";
 const CSlider = ({ value }) => {
+    const [sliderValue, setSliderValue] = useState(value);
+
+    useEffect(() => {
+        setSliderValue(value);
+    }, [value]);
+
     return (
         <CircularSlider
             min={0}
@@ -15,6 +21,7 @@ const CSlider = ({ value }) => {
             labelColor="#303030"
             knobColor="#303030"
             dataIndex={value}
+            onChange={setSliderValue}
             continuous={{ enabled: false }}
         />
     );

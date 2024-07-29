@@ -21,7 +21,7 @@ const Carousel = ({ items, setSelectedItem }) => {
             <IconButton onClick={handlePrevious} disabled={currentIndex == 0}>
                 <NavigateBeforeIcon />
             </IconButton>
-            <Typography variant="body1">{items[currentIndex]}</Typography>
+            <Typography variant="h4">{items[currentIndex]}</Typography>
             <IconButton
                 onClick={handleNext}
                 disabled={currentIndex == items.length - 1}

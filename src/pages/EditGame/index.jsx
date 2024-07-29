@@ -5,6 +5,7 @@ import { DataContext } from "../../contexts/DataContext";
 import Carousel from "../../components/containers/carousel";
 import CSlider from "../../components/sliders/circular-slider";
 import Nav from "./subs/Nav";
+import { Container } from "@mui/material";
 
 const EditGame = () => {
     const { usersList, gamesList, selectedGame } = useContext(DataContext);
@@ -43,17 +44,29 @@ const EditGame = () => {
 
     return (
         <>
+            <Navbar></Navbar>
             <BaseContainer>
                 <Nav />
-                <Carousel
-                    items={playersArr}
-                    setSelectedItem={setSelectedPlayer}
-                />
-                <Carousel
-                    items={roundsArr}
-                    setSelectedItem={setSelectedRound}
-                />
-                <CSlider value={score}></CSlider>
+                <Container
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: "auto",
+                        textAlign: "center",
+                    }}
+                >
+                    <Carousel
+                        items={roundsArr}
+                        setSelectedItem={setSelectedRound}
+                    />
+                    <Carousel
+                        items={playersArr}
+                        setSelectedItem={setSelectedPlayer}
+                    />
+                    <CSlider value={score}></CSlider>
+                </Container>
             </BaseContainer>
         </>
     );
