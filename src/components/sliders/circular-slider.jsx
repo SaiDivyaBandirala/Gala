@@ -1,7 +1,7 @@
 import React from "react";
 import CircularSlider from "@fseehawer/react-circular-slider";
-
-const CSlider = () => {
+import PropTypes from "prop-types";
+const CSlider = ({ value }) => {
     return (
         <CircularSlider
             min={0}
@@ -14,9 +14,12 @@ const CSlider = () => {
             progressColorTo="#fdbc00"
             labelColor="#303030"
             knobColor="#303030"
+            dataIndex={value}
             continuous={{ enabled: false }}
         />
     );
 };
-
+CSlider.propTypes = {
+    value: PropTypes.number.isRequired,
+};
 export default CSlider;
