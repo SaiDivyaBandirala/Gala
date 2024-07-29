@@ -33,7 +33,7 @@ export default function Nav() {
             <Typography variant="h4" sx={{ align: "center", flexGrow: 1 }}>
                 Game Scores
             </Typography>
-            <Typography variant="h4" sx={{}}>
+            <Typography variant="h4">
                 <ButtonBase
                     onClick={() => handleEdit()}
                     sx={{ padding: "0 1em" }}

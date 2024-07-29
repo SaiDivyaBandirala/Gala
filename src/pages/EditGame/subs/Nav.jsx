@@ -24,7 +24,7 @@ export default function Nav() {
             <Typography variant="h4" sx={{ align: "center", flexGrow: 1 }}>
                 Edit Scores
             </Typography>
-            <Typography variant="h4" sx={{}}>
+            <Typography variant="h4">
                 <ButtonBase
                     onClick={() => handleBack()}
                     sx={{ padding: "0 1em" }}
