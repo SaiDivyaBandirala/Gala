@@ -21,11 +21,14 @@ const Carousel = ({ items }) => {
 
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
-            <IconButton onClick={handlePrevious}>
+            <IconButton onClick={handlePrevious} disabled={currentIndex == 0}>
                 <NavigateBeforeIcon />
             </IconButton>
             <Typography variant="body1">{items[currentIndex]}</Typography>
-            <IconButton onClick={handleNext}>
+            <IconButton
+                onClick={handleNext}
+                disabled={currentIndex == items.length - 1}
+            >
                 <NavigateNextIcon />
             </IconButton>
         </div>
