@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconButton, Typography } from "@mui/material";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
@@ -6,23 +6,16 @@ import PropTypes from "prop-types";
 
 const Carousel = ({ items, setSelectedItem }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    const handleItemClick = (item) => {
-        setSelectedItem(item);
-    };
+
     const handlePrevious = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? items.length - 1 : prevIndex - 1
-        );
-        handleItemClick(currentIndex);
+        setCurrentIndex((prevIndex) => prevIndex - 1);
     };
 
     const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === items.length - 1 ? 0 : prevIndex + 1
-        );
-        handleItemClick(currentIndex);
+        setCurrentIndex((prevIndex) => prevIndex + 1);
     };
-    console.log(typeof setSelectedItem);
+
+    useEffect(() => setSelectedItem(currentIndex), [currentIndex]);
     return (
         <div style={{ display: "flex", alignItems: "center" }}>
             <IconButton onClick={handlePrevious} disabled={currentIndex == 0}>
