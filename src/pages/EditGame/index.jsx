@@ -8,27 +8,33 @@ import Nav from "./subs/Nav";
 import { Container } from "@mui/material";
 
 const EditGame = () => {
-    const { usersList, gamesList, selectedGame } = useContext(DataContext);
+    const { usersList, gamesList, selectedGame, updateGamesList } =
+        useContext(DataContext);
     if (selectedGame == undefined || selectedGame == null) return <></>;
 
-    const currentGame = gamesList.find((game) => game.id === selectedGame);
-    const playersArr = currentGame.data?.players?.map(
-        (_) => usersList.filter((u) => u.id == _)[0].username
+    const originalGame = gamesList.find((game) => game.id === selectedGame);
+    const [tempGameData, setTempGameData] = useState(
+        JSON.parse(JSON.stringify(originalGame))
+    );
+
+    const playersArr = tempGameData.data?.players?.map(
+        (_) => usersList.find((u) => u.id == _).username
     );
     const roundsArr = Array.from(
-        { length: Object.keys(currentGame.data?.rounds).length },
+        { length: Object.keys(tempGameData.data?.rounds).length },
         (_, index) => index + 1
     ).map((_) => "Round " + _);
 
     const [selectedPlayer, setSelectedPlayer] = useState(0);
     const [selectedRound, setSelectedRound] = useState(0);
     const [score, setScore] = useState(0);
+
     const fetchScore = () => {
         if (selectedPlayer >= 0 && selectedRound >= 0) {
-            const playerId = usersList.filter(
-                (_) => _.username === playersArr[selectedPlayer]
-            )[0].id;
-            const roundData = currentGame.data.rounds[selectedRound + 1];
+            const playerId = usersList.find(
+                (u) => u.username === playersArr[selectedPlayer]
+            ).id;
+            const roundData = tempGameData.data.rounds[selectedRound + 1];
             const playerScore = roundData.points[playerId] || 0;
             setScore(playerScore);
         }
@@ -36,17 +42,37 @@ const EditGame = () => {
 
     useEffect(() => {
         fetchScore();
-    }, []);
+    }, [selectedRound, selectedPlayer]);
 
     useEffect(() => {
-        fetchScore();
-    }, [selectedRound, selectedPlayer]);
+        if (selectedPlayer >= 0 && selectedRound >= 0) {
+            const playerId = usersList.find(
+                (u) => u.username === playersArr[selectedPlayer]
+            ).id;
+            setTempGameData((prevData) => {
+                const newData = { ...prevData };
+                newData.data.rounds[selectedRound + 1].points[playerId] = score;
+                return newData;
+            });
+        }
+    }, [score]);
+
+    const handleSave = () => {
+        const updatedGamesList = gamesList.map((game) =>
+            game.id === tempGameData.id ? tempGameData : game
+        );
+        updateGamesList(updatedGamesList);
+    };
+
+    const handleDiscard = () => {
+        setTempGameData(JSON.parse(JSON.stringify(originalGame)));
+    };
 
     return (
         <>
-            <Navbar></Navbar>
+            <Navbar />
             <BaseContainer>
-                <Nav />
+                <Nav onSave={handleSave} onDiscard={handleDiscard} />
                 <Container
                     style={{
                         display: "flex",
@@ -65,7 +91,7 @@ const EditGame = () => {
                         items={playersArr}
                         setSelectedItem={setSelectedPlayer}
                     />
-                    <CSlider value={score}></CSlider>
+                    <CSlider value={score} setValue={setScore} />
                 </Container>
             </BaseContainer>
         </>
